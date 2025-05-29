@@ -4,6 +4,7 @@ import com.serch.spring_boot_microservice_3_api_gateway.model.Role;
 import com.serch.spring_boot_microservice_3_api_gateway.security.UserPrincipal;
 import com.serch.spring_boot_microservice_3_api_gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,10 @@ public class UserController {
         userService.changeRole(role, userPrincipal.getUsername());
 
         return ResponseEntity.ok(true);
+    }
 
-
-
+    @GetMapping()
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal UserPrincipal userPrincipal){
+        return new ResponseEntity<>(userService.findByUsernameReturnToken(userPrincipal.getUsername()), HttpStatus.OK);
     }
 }

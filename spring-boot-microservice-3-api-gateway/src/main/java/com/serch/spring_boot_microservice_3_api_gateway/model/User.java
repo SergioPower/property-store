@@ -3,6 +3,7 @@ package com.serch.spring_boot_microservice_3_api_gateway.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.http.HttpStatusCode;
 
 import java.time.LocalDateTime;
 

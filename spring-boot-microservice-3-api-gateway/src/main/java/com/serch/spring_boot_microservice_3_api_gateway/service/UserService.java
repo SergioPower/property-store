@@ -30,4 +30,6 @@ public interface UserService {
      * @param username El nombre de usuario del usuario a modificar
      */
     void changeRole(Role newRole, String username);
+
+    User findByUsernameReturnToken(String username);
 }

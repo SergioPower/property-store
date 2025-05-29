@@ -6,6 +6,7 @@ import com.serch.spring_boot_microservice_3_api_gateway.repository.UserRepositor
 import com.serch.spring_boot_microservice_3_api_gateway.security.jwt.JwtProvider;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +52,17 @@ public class UserServiceImpl implements UserService {
     public void changeRole(Role newRole, String username){
         // Actualiza el rol del usuario en la base de datos
         userRepository.updateUserRole(username, newRole);
+    }
+
+    @Override
+    public User findByUsernameReturnToken(String username){
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("El usuario no existe" + username));
+
+        String jwt = jwtProvider.generateToken(user);
+        user.setToken(jwt);
+
+        return user;
+
     }
 }

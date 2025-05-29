@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient(
         value = "compra-service",
         path = "api/compra",
-        url = "${compra.service.url}",
+        //url = "${compra.service.url}",
         configuration = FeignConfiguration.class
 )
 public interface CompraServiceRequest {

@@ -8,7 +8,7 @@ import java.util.List;
 @FeignClient(
         value="inmueble-service",
         path="api/inmueble",
-        url="${inmueble.service.url}",
+        //url="${inmueble.service.url}",
         configuration = FeignConfiguration.class
 )
 public interface InmuebleServiceRequest {
